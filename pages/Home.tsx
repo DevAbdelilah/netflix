@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useCallback, useState } from "react";
+import React, { useState, useCallback } from "react";
 import Input from "@/components/Input";
+import axios from "axios";
 
 export default function Home() {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState(""); // Changed from username to name
   const [password, setPassword] = useState("");
   const [variant, setVariant] = useState("login");
 
@@ -14,11 +15,23 @@ export default function Home() {
     );
   }, []);
 
+  const registre = useCallback(async () => {
+    try {
+      await axios.post("/api/registre", {
+        email,
+        name, // Changed from username to name
+        password,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [email, name, password]); // Changed from username to name
+
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
-  const handleuserNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value); // Changed from handleuserNameChange to handleNameChange
   };
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -27,7 +40,7 @@ export default function Home() {
   return (
     <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-center bg-no-repeat bg-cover">
       <div className="bg-black w-full justify-center h-full lg:bg-opacity-50">
-        <nav className=" px-12 py-7">
+        <nav className="px-12 py-7">
           <img className="w-48" src="/images/logo.png" />
         </nav>
         <div className="flex justify-center">
@@ -35,14 +48,14 @@ export default function Home() {
             <h2 className="text-white text-4xl mb-8 font-semibold">
               {variant === "login" ? "Sign in" : "Registre"}
             </h2>
-            <div className=" flex flex-col gap-4">
+            <div className="flex flex-col gap-4">
               {variant === "registre" && (
                 <Input
                   id="name"
-                  value={username}
-                  label="username"
-                  onChange={handleuserNameChange}
-                  type="username"
+                  value={name} // Changed from username to name
+                  label="Name" // Changed from username to name
+                  onChange={handleNameChange} // Changed from handleuserNameChange to handleNameChange
+                  type="text" // Changed from username to text
                 />
               )}
               <Input
@@ -60,18 +73,21 @@ export default function Home() {
                 type="password"
               />
             </div>
-            <button className="bg-red-600  w-full  py-3  text-white rounded-md  mt-10 hover:bg-red-700 transition">
-              {variant === "login" ? "login " : "Registre"}
+            <button
+              onClick={registre}
+              className="bg-red-600 w-full py-3 text-white rounded-md mt-10 hover:bg-red-700 transition"
+            >
+              {variant === "login" ? "login" : "Registre"}
             </button>
-            <p className="text-neutral-500 mt-12  ">
+            <p className="text-neutral-500 mt-12">
               {variant === "login"
-                ? "First time using Netflix ?"
-                : "Already Have an account ?"}
+                ? "First time using Netflix?"
+                : "Already have an account?"}
               <span
                 onClick={toggleVariant}
                 className="cursor-pointer text-white ml-2"
               >
-                Create an account{" "}
+                {variant === "login" ? "Create an account" : "Sign in"}
               </span>
             </p>
           </div>
