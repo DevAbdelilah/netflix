@@ -19,19 +19,19 @@ export default function Home() {
     try {
       await axios.post("/api/registre", {
         email,
-        name, // Changed from username to name
+        name, 
         password,
       });
     } catch (error) {
       console.log(error);
     }
-  }, [email, name, password]); // Changed from username to name
+  }, [email, name, password]); 
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value); // Changed from handleuserNameChange to handleNameChange
+    setName(e.target.value);
   };
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
