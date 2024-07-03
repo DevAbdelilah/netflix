@@ -73,10 +73,10 @@ export default function Auth() {
               {variant === "registre" && (
                 <Input
                   id="name"
-                  value={name} // Changed from username to name
-                  label="Name" // Changed from username to name
-                  onChange={handleNameChange} // Changed from handleuserNameChange to handleNameChange
-                  type="text" // Changed from username to text
+                  value={name} 
+                  label="Name" 
+                  onChange={handleNameChange} 
+                  type="text" 
                 />
               )}
               <Input
