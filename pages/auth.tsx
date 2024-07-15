@@ -3,12 +3,11 @@ import React, { useState, useCallback } from "react";
 import Input from "@/components/Input";
 import axios from "axios";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/router";
+
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 
 export default function Auth() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [name, setName] = useState(""); // Changed from username to name
   const [password, setPassword] = useState("");
@@ -25,15 +24,12 @@ export default function Auth() {
       await signIn("credentials", {
         email,
         password,
-        redirect: false,
-        callbackUrl: "/",
+        callbackUrl: "/profiles",
       });
-
-      router.push("/");
     } catch (error) {
       console.log(error);
     }
-  }, [email, password, router]);
+  }, [email, password]);
 
   const registre = useCallback(async () => {
     try {
@@ -61,9 +57,7 @@ export default function Auth() {
   return (
     <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-center bg-no-repeat bg-cover">
       <div className="bg-black w-full justify-center h-full lg:bg-opacity-50">
-        <nav className="px-12 py-7">
-          <img className="w-48" src="/images/logo.png" />
-        </nav>
+        <nav className="px-12 py-7"></nav>
         <div className="flex justify-center">
           <div className="bg-black md:w-full bg-opacity-70 px-16 py-5 self-center mt-2 lg:w-2/4 lg:max-w-md rounded-md ">
             <h2 className="text-white text-4xl mb-8 font-semibold">
@@ -73,10 +67,10 @@ export default function Auth() {
               {variant === "registre" && (
                 <Input
                   id="name"
-                  value={name} 
-                  label="Name" 
-                  onChange={handleNameChange} 
-                  type="text" 
+                  value={name}
+                  label="Name"
+                  onChange={handleNameChange}
+                  type="text"
                 />
               )}
               <Input
@@ -102,13 +96,13 @@ export default function Auth() {
             </button>
             <div className="flex flex-row items-center gap-4 mt-8 justify-center">
               <div
-                onClick={() => signIn("google", { callbackUrl: "/" })}
+                onClick={() => signIn("google", { callbackUrl: "/profiles" })}
                 className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition"
               >
                 <FcGoogle size={30} />
               </div>
               <div
-                onClick={() => signIn("github", { callbackUrl: "/" })}
+                onClick={() => signIn("github", { callbackUrl: "/profiles" })}
                 className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition"
               >
                 <FaGithub size={30} />

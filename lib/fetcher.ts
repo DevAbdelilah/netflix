@@ -1,4 +1,4 @@
-import React from "react";
+
 import axios from "axios";
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);

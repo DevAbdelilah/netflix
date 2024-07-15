@@ -16,7 +16,6 @@ export default NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
-
     Credentials({
       id: "credentials",
       name: "Credentials",
@@ -62,8 +61,7 @@ export default NextAuth({
     strategy: "jwt",
   },
   jwt: {
-    secret: process.env.NEXTAUTH_Jwt_secret,
+    secret: process.env.NEXTAUTH_JWT_SECRET, 
   },
-
   secret: process.env.NEXTAUTH_SECRET,
 });
