@@ -1,4 +1,4 @@
-import { error } from "console";
+
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 

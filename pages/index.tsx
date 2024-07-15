@@ -30,7 +30,7 @@ export default function Home() {
       <Navbar />
       <Billboard />
       <div className="pb-40">
-        <MovieList title="tranding now " data={movies} />
+        <MovieList data={movies} title={"Trending Now"} />
       </div>
     </>
   );
