@@ -1,4 +1,3 @@
-
 import { NextApiRequest, NextApiResponse } from "next";
 import { without } from "lodash";
 import prismadb from "@/lib/prismadb";
@@ -57,7 +56,7 @@ export default async function handler(
       });
       return res.status(200).json(updatedUser);
     }
-    return res.status(405).end()
+    return res.status(405).end();
   } catch (error) {
     console.log(error);
     return res.status(400).end();
